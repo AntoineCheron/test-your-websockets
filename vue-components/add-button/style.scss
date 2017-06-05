@@ -1,0 +1,26 @@
+.add-button {
+	width: calc(100% - 20px);
+	padding-top: calc(100% - 23px);
+	position: relative;
+
+	border: none;
+
+	& > .text {
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+
+		text-align: center;
+		color: white;
+		font-size: 50px;
+		font-family: phosphate;
+		text-transform: uppercase;
+	}
+}
+
+button.add-button:hover {
+	cursor: pointer;
+}
+
+.add-button:focus {
+	outline: 0;
+}
