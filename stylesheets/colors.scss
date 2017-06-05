@@ -8,12 +8,102 @@ button.red :hover {
 	background-color: $light-red;
 }
 
+.red-card {
+	& > .name {
+		color: $red;
+	}
+
+	& > .connexion {
+		& > .address {
+			border-color: $red;
+		}
+
+		& > .socket-status {
+			& > .buttons {
+				& > .filled {
+					color: white;
+
+					// Creates the gradient
+					border: none;
+				  	-moz-background-image: -moz-linear-gradient(left, $red-gradient-start 0%, $red 100%);
+				  	-webkit-background-image: -webkit-linear-gradient(left, $red-gradient-start 0%, $red 100%);
+				  	background-image: linear-gradient(to right, $red-gradient-start 0%, $red 100%);
+				  	background-image-slice: 1;
+				}
+
+				& > .not-filled {
+					color: $red;
+					
+					// Creates the gradient
+					border: 1px solid transparent;
+				  	background-color: $light-grey;
+				  	-moz-border-image: -moz-linear-gradient(top left, $red-gradient-start 0%, $red 100%);
+				  	-webkit-border-image: -webkit-linear-gradient(top left, $red-gradient-start 0%, $red 100%);
+				  	border-image: linear-gradient(to bottom right, $red-gradient-start 0%, $red 100%);
+				  	border-image-slice: 1;
+				}
+			}
+		}
+	}
+
+	& > .message {
+		button {
+			color: $red;
+		}
+	}
+}
+
 .blue {
 	background-color: $blue;
 }
 
 button.blue :hover {
 	background-color: $light-blue;
+}
+
+.blue-card {
+	& > .name {
+		color: $blue;
+	}
+
+	& > .connexion {
+		& > .address {
+			border-color: $blue;
+		}
+
+		& > .socket-status {
+			& > .buttons {
+				& > .filled {
+					color: white;
+
+					// Creates the gradient
+					border: none;
+				  	-moz-background-image: -moz-linear-gradient(left, $light-blue 0%, $blue 100%);
+				  	-webkit-background-image: -webkit-linear-gradient(left, $light-blue 0%, $blue 100%);
+				  	background-image: linear-gradient(to right, $light-blue 0%, $blue 100%);
+				  	background-image-slice: 1;
+				}
+
+				& > .not-filled {
+					color: $blue;
+					
+					// Creates the gradient
+					border: 1px solid transparent;
+				  	background-color: $light-grey;
+				  	-moz-border-image: -moz-linear-gradient(top left, $light-blue 0%, $blue 100%);
+				  	-webkit-border-image: -webkit-linear-gradient(top left, $light-blue 0%, $blue 100%);
+				  	border-image: linear-gradient(to bottom right, $light-blue 0%, $blue 100%);
+				  	border-image-slice: 1;
+				}
+			}
+		}
+	}
+
+	& > .message {
+		button {
+			color: $blue;
+		}
+	}
 }
 
 .orange {
@@ -24,12 +114,102 @@ button.orange :hover {
 	background-color: $light-orange;
 }
 
+.orange-card {
+	& > .name {
+		color: $orange;
+	}
+
+	& > .connexion {
+		& > .address {
+			border-color: $orange;
+		}
+
+		& > .socket-status {
+			& > .buttons {
+				& > .filled {
+					color: white;
+
+					// Creates the gradient
+					border: none;
+				  	-moz-background-image: -moz-linear-gradient(left, $light-orange 0%, $orange 100%);
+				  	-webkit-background-image: -webkit-linear-gradient(left, $light-orange 0%, $orange 100%);
+				  	background-image: linear-gradient(to right, $light-orange 0%, $orange 100%);
+				  	background-image-slice: 1;
+				}
+
+				& > .not-filled {
+					color: $orange;
+					
+					// Creates the gradient
+					border: 1px solid transparent;
+				  	background-color: $light-grey;
+				  	-moz-border-image: -moz-linear-gradient(top left, $light-orange 0%, $orange 100%);
+				  	-webkit-border-image: -webkit-linear-gradient(top left, $light-orange 0%, $orange 100%);
+				  	border-image: linear-gradient(to bottom right, $light-orange 0%, $orange 100%);
+				  	border-image-slice: 1;
+				}
+			}
+		}
+	}
+
+	& > .message {
+		button {
+			color: $orange;
+		}
+	}
+}
+
 .green {
 	background-color: $green;
 }
 
 button.green :hover {
 	background-color: $light-green;
+}
+
+.green-card {
+	& > .name {
+		color: $green;
+	}
+
+	& > .connexion {
+		& > .address {
+			border-color: $green;
+		}
+
+		& > .socket-status {
+			& > .buttons {
+				& > .filled {
+					color: white;
+
+					// Creates the gradient
+					border: none;
+				  	-moz-background-image: -moz-linear-gradient(left, $light-green 0%, $green 100%);
+				  	-webkit-background-image: -webkit-linear-gradient(left, $light-green 0%, $green 100%);
+				  	background-image: linear-gradient(to right, $light-green 0%, $green 100%);
+				  	background-image-slice: 1;
+				}
+
+				& > .not-filled {
+					color: $green;
+					
+					// Creates the gradient
+					border: 1px solid transparent;
+				  	background-color: $light-grey;
+				  	-moz-border-image: -moz-linear-gradient(top left, $light-green 0%, $green 100%);
+				  	-webkit-border-image: -webkit-linear-gradient(top left, $light-green 0%, $green 100%);
+				  	border-image: linear-gradient(to bottom right, $light-green 0%, $green 100%);
+				  	border-image-slice: 1;
+				}
+			}
+		}
+	}
+
+	& > .message {
+		button {
+			color: $green;
+		}
+	}
 }
 
 .purple {
@@ -40,10 +220,100 @@ button.purple :hover {
 	background-color: $light-purple;
 }
 
+.purple-card {
+	& > .name {
+		color: $purple;
+	}
+
+	& > .connexion {
+		& > .address {
+			border-color: $purple;
+		}
+
+		& > .socket-status {
+			& > .buttons {
+				& > .filled {
+					color: white;
+
+					// Creates the gradient
+					border: none;
+				  	-moz-background-image: -moz-linear-gradient(left, $light-purple 0%, $purple 100%);
+				  	-webkit-background-image: -webkit-linear-gradient(left, $light-purple 0%, $purple 100%);
+				  	background-image: linear-gradient(to right, $light-purple 0%, $purple 100%);
+				  	background-image-slice: 1;
+				}
+
+				& > .not-filled {
+					color: $purple;
+					
+					// Creates the gradient
+					border: 1px solid transparent;
+				  	background-color: $light-grey;
+				  	-moz-border-image: -moz-linear-gradient(top left, $light-purple 0%, $purple 100%);
+				  	-webkit-border-image: -webkit-linear-gradient(top left, $light-purple 0%, $purple 100%);
+				  	border-image: linear-gradient(to bottom right, $light-purple 0%, $purple 100%);
+				  	border-image-slice: 1;
+				}
+			}
+		}
+	}
+
+	& > .message {
+		button {
+			color: $purple;
+		}
+	}
+}
+
 .dark-grey {
 	background-color: $dark-grey;
 }
 
 button.dark-grey :hover {
 	background-color: $grey;
+}
+
+.dark-grey-card {
+	& > .name {
+		color: $dark-grey;
+	}
+
+	& > .connexion {
+		& > .address {
+			border-color: $dark-grey;
+		}
+
+		& > .socket-status {
+			& > .buttons {
+				& > .filled {
+					color: white;
+
+					// Creates the gradient
+					border: none;
+				  	-moz-background-image: -moz-linear-gradient(left, $grey 0%, $dark-grey 100%);
+				  	-webkit-background-image: -webkit-linear-gradient(left, $grey 0%, $dark-grey 100%);
+				  	background-image: linear-gradient(to right, $grey 0%, $dark-grey 100%);
+				  	background-image-slice: 1;
+				}
+
+				& > .not-filled {
+					color: $dark-grey;
+					
+					// Creates the gradient
+					border: 1px solid transparent;
+				  	background-color: $light-grey;
+				  	-moz-border-image: -moz-linear-gradient(top left, $grey 0%, $dark-grey 100%);
+				  	-webkit-border-image: -webkit-linear-gradient(top left, $grey 0%, $dark-grey 100%);
+				  	border-image: linear-gradient(to bottom right, $grey 0%, $dark-grey 100%);
+				  	border-image-slice: 1;
+				}
+			}
+		}
+	}
+
+	& > .message {
+		button {
+			color: $dark-grey;
+		}
+	}
 }

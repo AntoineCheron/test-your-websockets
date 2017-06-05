@@ -5,7 +5,9 @@
 
 	<link rel="stylesheet" href="style.css"/>
 	<title>Test your Websockets</title>
-	<script src="main.js"></script>
+
+	<!-- Importing VueJS -->
+	<script src="https://unpkg.com/vue"></script>
 
 	<!-- Importing fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Montserrat" rel="stylesheet">
@@ -16,9 +18,62 @@
 		<div class="title w-12">Test Your <span id="websocket-title">Websockets</span></div>
 	</div>
 
+	<div id="app">
+		{{message}}
+	</div>
+
 	<div class="row">
 		<div class="w-12">
-			<div id="cards">
+			<div id="buttons">
+				<div class="w-6">
+					<div class="socket-card red-card">
+						<div class="name">Socket1</div>
+						<div class="connexion">
+							<div class="address">
+								<div class="label">Address</div>
+								<input class="field" type="text" placeholder="ws://your-address">
+							</div>
+							<div class="socket-status">
+								<div class="status">Status : <span class="value">disconnected</span></div>
+								<div class="buttons">
+									<button class="connect filled" onclick="toggleConnect()">connect</button>
+									<button class="send not-filled" onclick="sendMessage()">send message</button>
+								</div>
+							</div>
+						</div>
+						<div class="request message">
+							<div class="flex-space-between">
+								<div>
+									<button onclick="previous()">previous</button>
+									<button onclick="next()">next</button>
+								</div>
+								<div>
+									<button class="clear-button" onclick="clear()">clear</button>
+								</div>
+							</div>
+							<div>
+								<p class="message-label message-label-1">Message</p>
+								<textarea rows="11" cols="61"></textarea>
+							</div>
+						</div>
+
+						<div class="response message">
+							<div class="flex-space-between">
+								<div>
+									<button onclick="previous()">previous</button>
+									<button onclick="next()">next</button>
+								</div>
+								<div>
+									<button class="clear-button" onclick="clear()">clear</button>
+								</div>
+							</div>
+							<div>
+								<p class="message-label message-label-2">Response</p>
+								<textarea rows="11" cols="61"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="w-2">
 					<button class="add-button red" onclick="alert('Hello World')">
 						<div class="text"><div class="valign">ADD</div></div>
@@ -32,5 +87,8 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Importing main js source -->
+	<script src="main.js"></script>
 </body>
 </html>

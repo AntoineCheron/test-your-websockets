@@ -4,3 +4,8 @@
     transform: translateY(-50%);
     /* vendor prefixes omitted due to brevity */
 }
+
+.flex-space-between {
+	display: flex;
+	justify-content: space-between;
+}
