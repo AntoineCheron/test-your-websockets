@@ -1,0 +1,49 @@
+// Colors class for the background of the add button
+
+.red {
+	background-color: $red;
+}
+
+button.red :hover {
+	background-color: $light-red;
+}
+
+.blue {
+	background-color: $blue;
+}
+
+button.blue :hover {
+	background-color: $light-blue;
+}
+
+.orange {
+	background-color: $orange;
+}
+
+button.orange :hover {
+	background-color: $light-orange;
+}
+
+.green {
+	background-color: $green;
+}
+
+button.green :hover {
+	background-color: $light-green;
+}
+
+.purple {
+	background-color: $purple;
+}
+
+button.purple :hover {
+	background-color: $light-purple;
+}
+
+.dark-grey {
+	background-color: $dark-grey;
+}
+
+button.dark-grey :hover {
+	background-color: $grey;
+}

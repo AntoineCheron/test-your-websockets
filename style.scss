@@ -1,0 +1,60 @@
+@import 'stylesheets/variables';
+@import 'stylesheets/grid-system';
+@import 'stylesheets/colors';
+@import 'stylesheets/utils';
+
+body {
+	background-color: $black;
+}
+
+.title {
+	font-size: 72px;
+	font-family: Montserrat;
+	color: white;
+
+	margin-bottom: 44px !important;
+
+	& > #websocket-title {
+		color: $blue;
+		font-family: 'Abril Fatface';
+	}
+}
+
+#cards {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.add-button {
+	width: calc(100% - 20px);
+	padding-top: calc(100% - 23px);
+	position: relative;
+
+	border: none;
+
+	& > .text {
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+
+		text-align: center;
+		color: white;
+		font-size: 50px;
+		font-family: phosphate;
+		text-transform: uppercase;
+	}
+}
+
+button.add-button:hover {
+	cursor: pointer;
+}
+
+.add-button:focus {
+	outline: 0;
+}
+
+// Importing font
+@font-face {
+	font-family: phosphate;
+	src: url(fonts/Phosphate.ttf);
+	font-weight: solid;
+}
