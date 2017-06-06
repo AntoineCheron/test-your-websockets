@@ -1,6 +1,31 @@
 var app = new Vue({
   el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
+  data () {
+  	return {
+  		sockets : [],
+  		cardColors : ['red', 'blue', 'orange', 'green', 'purple', 'dark-grey'],
+  		buttonColor : 'red',
+  		lastIndex: 0,
+  	}
+  },
+  methods: {
+  	addSocket: function() {
+  		// Retrieve the name and color information for the socket object
+  		const name = `Socket ${this.lastIndex + 1}`;
+  		const color = `${this.cardColors[(this.lastIndex) % this.cardColors.length]}-card`;
+
+  		// Create the socket object
+  		const socket = {
+  			'name' : name,
+  			'color' : color,
+  		};
+
+  		// Add the socket into the array, it will automatically add it to the view
+  		this.sockets.push(socket);
+
+  		// Change the color of the add-button
+  		this.lastIndex++;
+  		this.buttonColor = this.cardColors[this.lastIndex % this.cardColors.length];
+  	}
+  },
 });

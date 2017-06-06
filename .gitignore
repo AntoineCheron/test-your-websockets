@@ -1,3 +1,5 @@
 .DS_Store
 testYourWebsocket.sublime-project
 testYourWebsocket.sublime-workspace
+server.js
+node_modules

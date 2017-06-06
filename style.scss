@@ -4,6 +4,7 @@
 @import 'stylesheets/utils';
 @import 'vue-components/add-button/style';
 @import 'vue-components/socket-card/style';
+@import 'vue-components/ace/style';
 
 body {
 	background-color: $black;
@@ -22,9 +23,9 @@ body {
 	}
 }
 
-//===========================================================================
-//				ADD BUTTONS RELATED CLASSES
-//===========================================================================
+#buttons, #cards {
+	display: inline-block;
+}
 
 .flex-wrap {
 	display: flex;

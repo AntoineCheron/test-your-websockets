@@ -8,6 +8,7 @@
 	padding-right: 15px;
 	padding-bottom: 5px;
 	margin-top: 33px;
+	margin-bottom: 20px;
 
 	background-color: $light-grey;
 
@@ -80,6 +81,14 @@
 					text-transform: uppercase;
 				}
 
+				button:disabled {
+					box-shadow: none !important;
+					color: $grey;
+					border-image: none;
+					border: 1px solid $grey;
+					cursor: default !important;
+				}
+
 				button:hover {
 					cursor: pointer;
 					box-shadow: 0px 2px 4px rgba(0,0,0,0.5);
@@ -106,6 +115,10 @@
 
 			border: none;
 			background-color: transparent;
+		}
+
+		button:disabled {
+			color: $grey;
 		}
 
 		button.clear-button {
