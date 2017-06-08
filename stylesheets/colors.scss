@@ -51,6 +51,10 @@ button.red :hover {
 			color: $red;
 		}
 	}
+
+	.ace_gutter {
+		color: $red !important;
+	}
 }
 
 .blue {
@@ -103,6 +107,10 @@ button.blue :hover {
 		button {
 			color: $blue;
 		}
+	}
+
+	.ace_gutter {
+		color: $blue !important;
 	}
 }
 
@@ -157,6 +165,10 @@ button.orange :hover {
 			color: $orange;
 		}
 	}
+
+	.ace_gutter {
+		color: $orange !important;
+	}
 }
 
 .green {
@@ -209,6 +221,10 @@ button.green :hover {
 		button {
 			color: $green;
 		}
+	}
+
+	.ace_gutter {
+		color: $green !important;
 	}
 }
 
@@ -263,6 +279,10 @@ button.purple :hover {
 			color: $purple;
 		}
 	}
+
+	.ace_gutter {
+		color: $purple !important;
+	}
 }
 
 .dark-grey {
@@ -315,5 +335,9 @@ button.dark-grey :hover {
 		button {
 			color: $dark-grey;
 		}
+	}
+
+	.ace_gutter {
+		color: $dark-grey !important;
 	}
 }

@@ -6,7 +6,7 @@ Vue.component('editor', {
     mounted: function() {
         const that = this;
         this.editor = ace.edit(this.uuid);
-        this.editor.setTheme("ace/theme/chrome");
+        this.editor.setTheme("ace/theme/test_your_websocket_custom");
         this.editor.getSession().setMode("ace/mode/javascript");
         this.editor.setReadOnly(this.readOnly);
         this.editor.getSession().on('change', () => { that.editorValueChanged(); });
