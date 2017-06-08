@@ -157,15 +157,13 @@
 			left: -44px;
 		}
 
-		textarea {
+		.editor {
 			margin-left: 17px;
 			margin-top: -28px;
 			border: 1px solid $middle-grey;
 			background-color: white;
-		}
-
-		textarea:focus {
-			outline: 0;
+			width: 94%;
+			height: 149px;
 		}
 	}
 }

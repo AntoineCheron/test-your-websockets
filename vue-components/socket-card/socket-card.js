@@ -1,3 +1,6 @@
+// TODO : next step starts here : https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
+
+
 Vue.component('socket-card', {
 	props: {
 		'color' : {
@@ -23,6 +26,8 @@ Vue.component('socket-card', {
 			requestHistoryIndex: 0,
 			responseHistory: [],
 			responseHistoryIndex: 0,
+			requestEditable: true,
+			responseEditable: false,
 		}
 	},
 	methods: {
@@ -76,7 +81,7 @@ Vue.component('socket-card', {
 					that.socket = socket;
 					that.status = 'connected';
 					that.connectClass = 'not-filled';
-					that.connextText = 'disconnect';
+					that.connectText = 'disconnect';
 					that.sendClass = 'filled';
 					that.response = 'Successfully connected !';
 					if(that.responseHistory.length != 0) { that.responseHistoryIndex++; }
@@ -86,6 +91,7 @@ Vue.component('socket-card', {
 					let msg = '';
 					try {
 						msg = JSON.parse(event.data);
+						msg = JSON.stringify(msg, null, '\t');
 					} catch (err) {
 						msg = event.data;
 					}
@@ -113,6 +119,12 @@ Vue.component('socket-card', {
 				this.response = err.message;
 				this.socket = null;
 			}
+		},
+		updateRequest: function(value) {
+			this.request = value;
+		},
+		updateResponse: function(value) {
+			this.response = value;
 		}
 	},
 	template: '<div class="w-6">\
@@ -143,7 +155,7 @@ Vue.component('socket-card', {
 						</div>\
 						<div>\
 							<p class="message-label message-label-1">Message</p>\
-							<textarea v-model="request" rows="11" cols="61"></textarea>\
+							<editor v-model="request" :readOnly="!requestEditable"></editor>\
 						</div>\
 					</div>\
 					<div class="response message">\
@@ -158,7 +170,7 @@ Vue.component('socket-card', {
 						</div>\
 						<div>\
 							<p class="message-label message-label-2">Response</p>\
-							<textarea v-model="response" rows="11" cols="61" disabled></textarea>\
+							<editor v-model="response" :readOnly="!responseEditable"></editor>\
 						</div>\
 					</div>\
 				</div>\

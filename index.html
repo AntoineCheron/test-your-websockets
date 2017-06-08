@@ -14,19 +14,19 @@
 </head>
 
 <body>
-	<div id="app">
-		<div class="row">
-			<div class="title w-12">Test Your <span id="websocket-title">Websockets</span></div>
-		</div>
+	<div class="row">
+		<div class="title w-12">Test Your <span id="websocket-title">Websockets</span></div>
+	</div>
 
-		<div class="row">
+	<div class="row">
+		<div id="app">
 			<div class="w-12">
 				<div class="flex-wrap">
-					<div id="cards">
-						<socket-card color="red-card" name="Socket2"></socket-card>
+					<div id="cards" v-for="socket in sockets">
+						<socket-card :color="socket.color" :name="socket.name"></socket-card>
 					</div>
 					<div id="buttons">
-						<add-button color="orange"></add-button>
+						<add-button :color="buttonColor" @add="addSocket"></add-button>
 					</div>
 				</div>
 			</div>
@@ -34,7 +34,8 @@
 	</div>
 
 	<!-- Importing main js source & vue components -->
-
+	<script src="scripts/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="vue-components/ace/ace.js"></script>
 	<script src="vue-components/add-button/add-button.js"></script>
 	<script src="vue-components/socket-card/socket-card.js"></script>
 	<script src="main.js"></script>
