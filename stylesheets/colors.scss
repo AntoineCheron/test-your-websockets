@@ -14,7 +14,7 @@ button.red :hover {
 	}
 
 	& > .connexion {
-		& > .address {
+		& > .address>.field {
 			border-color: $red;
 		}
 
@@ -43,6 +43,11 @@ button.red :hover {
 				  	border-image-slice: 1;
 				}
 			}
+
+			& > .use-tls>div>div>.tls-checkbox>input[type=checkbox]:checked + label:after {
+				border-color: $red;
+			}
+
 		}
 	}
 
@@ -71,7 +76,7 @@ button.blue :hover {
 	}
 
 	& > .connexion {
-		& > .address {
+		& > .address>.field {
 			border-color: $blue;
 		}
 
@@ -99,6 +104,10 @@ button.blue :hover {
 				  	border-image: linear-gradient(to bottom right, $light-blue 0%, $blue 100%);
 				  	border-image-slice: 1;
 				}
+			}
+
+			& > .use-tls>div>div>.tls-checkbox>input[type=checkbox]:checked + label:after {
+				border-color: $blue;
 			}
 		}
 	}
@@ -128,7 +137,7 @@ button.orange :hover {
 	}
 
 	& > .connexion {
-		& > .address {
+		& > .address>.field {
 			border-color: $orange;
 		}
 
@@ -156,6 +165,10 @@ button.orange :hover {
 				  	border-image: linear-gradient(to bottom right, $light-orange 0%, $orange 100%);
 				  	border-image-slice: 1;
 				}
+			}
+
+			& > .use-tls>div>div>.tls-checkbox>input[type=checkbox]:checked + label:after {
+				border-color: $orange;
 			}
 		}
 	}
@@ -185,7 +198,7 @@ button.green :hover {
 	}
 
 	& > .connexion {
-		& > .address {
+		& > .address>.field {
 			border-color: $green;
 		}
 
@@ -213,6 +226,10 @@ button.green :hover {
 				  	border-image: linear-gradient(to bottom right, $light-green 0%, $green 100%);
 				  	border-image-slice: 1;
 				}
+			}
+
+			& > .use-tls>div>div>.tls-checkbox>input[type=checkbox]:checked + label:after {
+				border-color: $green;
 			}
 		}
 	}
@@ -242,7 +259,7 @@ button.purple :hover {
 	}
 
 	& > .connexion {
-		& > .address {
+		& > .address>.field {
 			border-color: $purple;
 		}
 
@@ -270,6 +287,10 @@ button.purple :hover {
 				  	border-image: linear-gradient(to bottom right, $light-purple 0%, $purple 100%);
 				  	border-image-slice: 1;
 				}
+			}
+
+			& > .use-tls>div>div>.tls-checkbox>input[type=checkbox]:checked + label:after {
+				border-color: $purple;
 			}
 		}
 	}
@@ -299,7 +320,7 @@ button.dark-grey :hover {
 	}
 
 	& > .connexion {
-		& > .address {
+		& > .address>.field {
 			border-color: $dark-grey;
 		}
 
@@ -327,6 +348,10 @@ button.dark-grey :hover {
 				  	border-image: linear-gradient(to bottom right, $grey 0%, $dark-grey 100%);
 				  	border-image-slice: 1;
 				}
+			}
+
+			& > .use-tls>div>div>.tls-checkbox>input[type=checkbox]:checked + label:after {
+				border-color: $dark-grey;
 			}
 		}
 	}
