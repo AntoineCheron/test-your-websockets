@@ -1,6 +1,3 @@
-// TODO : next step starts here : https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
-
-
 Vue.component('socket-card', {
 	props: {
 		'color' : {
