@@ -28,7 +28,7 @@ Please respect the rules described here : https://code.tutsplus.com/tutorials/ho
 
 ## Licence
 
-MIT, do whatever you want with the code : use it, modify it, share it, improve it. 
+[MIT](./LICENSE.md), do whatever you want with the code : use it, modify it, share it, improve it. 
 
 ## Technologies
 
