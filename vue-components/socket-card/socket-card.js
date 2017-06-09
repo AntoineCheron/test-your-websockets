@@ -14,8 +14,9 @@ Vue.component('socket-card', {
 	},
 	data: function () {
 		return {
-			socketAddress: '',
+			socketAddress: 'ws://',
 			socketSubprotocol: '',
+			enableTLS: false,
 			status: 'disconnected',
 			connectClass: 'filled',
 			connectText: 'connect',
@@ -125,7 +126,7 @@ Vue.component('socket-card', {
 					that.connectClass = 'filled';
 					that.connectText = 'connect';
 					that.sendClass = 'not-filled';
-					that.response = `Socket closed with code ${event.code}, reason : ${event.reason}`;
+					that.response = `Socket closed with code ${event.code}\nReason : ${SOCKET_CODE[String(event.code)]}`;
 					if(that.responseHistory.length != 0) { that.responseHistoryIndex++; }
 				}
 			} catch (err) {
@@ -148,6 +149,29 @@ Vue.component('socket-card', {
              });
             return uuid;
         },
+        toggleTLS: function() {
+        	// this.enableTLS change after this function has been called
+        	if (!this.enableTLS) {
+        		this.socketAddress = this.socketAddress.replace('ws', 'wss');
+        	} else {
+        		this.socketAddress = this.socketAddress.replace('wss', 'ws');
+        	}
+        },
+        toggleTlSFromText: function(event) {
+        	// Set the value of socketAddress (default behavior)
+        	this.socketAddress = event.target.value;
+
+        	// Look at the address to determine wether the user wants to use TLS or not
+        	const prefix = event.target.value.substring(0,3);
+        	if (prefix === 'wss') { this.enableTLS = true; }
+        	else { this.enableTLS = false; }
+        },
+        enterPressed: function(event) {
+        	if (event.keyCode === 13 && this.status === 'disconnected') {
+        		this.toggleConnect();
+        		return false;
+        	}
+        },
 	},
 	template: `<div class="w-6">
 				<div class="socket-card" :class="color">
@@ -155,11 +179,11 @@ Vue.component('socket-card', {
 					<div class="connexion">
 						<div class="address">
 							<div class="label">Address</div>
-							<input @input="toggleTls(value)" class="field" type="text" placeholder="ws://your-address" 
-							:disabled="status === 'connected'">
+							<input :value="socketAddress" @input="toggleTlSFromText" class="field" type="text" placeholder="ws://your-address" 
+							:disabled="status === 'connected'" @keypress="enterPressed">
 							<div class="label sub-protocol-label">Sub-protocol</div>
 							<input v-model="socketSubprotocol" class="field-subprotocol" type="text" placeholder="(optional)" 
-							:disabled="status === 'connected'">
+							:disabled="status === 'connected'" @keypress="enterPressed">
 						</div>
 						<div class="socket-status">
 							<div class="status">Status : <span class="value">{{status}}</span></div>
@@ -172,9 +196,9 @@ Vue.component('socket-card', {
 									<div>
 										<div class="tls-checkbox">
 											<input v-model="enableTLS" type="checkbox" :id="checkboxId" :disabled="status === 'connected'">
-											<label :for="checkboxId"></label>
+											<label :for="checkboxId" @click="toggleTLS"></label>
 										</div>
-										<label :for="checkboxId" class="checkbox-label">Use TLS protocol</label>
+										<label :for="checkboxId" class="checkbox-label" @click="toggleTLS">Use TLS protocol</label>
 									</div>
 								</div>
 								
