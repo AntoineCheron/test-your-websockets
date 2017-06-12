@@ -14,7 +14,7 @@ Vue.component('socket-card', {
 	},
 	data: function () {
 		return {
-			socketAddress: 'ws://',
+			socketAddress: 'ws://localhost:8080',
 			socketSubprotocol: '',
 			enableTLS: false,
 			status: 'disconnected',
@@ -28,6 +28,7 @@ Vue.component('socket-card', {
 			requestHistoryIndex: 0,
 			responseHistory: [],
 			responseHistoryIndex: 0,
+			requestResponseLinked: {},
 			requestEditable: true,
 			responseEditable: false,
 			checkboxId: '',
@@ -54,7 +55,7 @@ Vue.component('socket-card', {
 			}
 		},
 		sendMessage: function () {
-			if (this.socket !== null && this.socket.readyState === 1) {
+			if (this.socket !== null && this.socket.readyState === 1 && this.request !== '') {
 				this.socket.send(this.request);
 				this.requestHistory.push(this.request);
 				this.requestHistoryIndex = this.requestHistory.length;
@@ -64,27 +65,59 @@ Vue.component('socket-card', {
 		previousRequest: function () {
 			this.requestHistoryIndex--;
 			this.request = this.requestHistory[this.requestHistoryIndex];
+			this.showAssociatedResponse();
 		},
 		nextRequest: function () {
 			this.requestHistoryIndex++;
 			this.request = this.requestHistory[this.requestHistoryIndex];
+			this.showAssociatedResponse();
 		},
 		clearRequest: function () {
 			this.request = '';
 			this.requestHistoryIndex = this.requestHistory.length;
 		},
+		showAssociatedResponse() {
+			// Check whether there is a response linked to the request. If so, show it.
+			if (this.requestResponseLinked[this.request]) {
+				this.goToResponse(this.requestResponseLinked[this.request]);
+			}
+		},
+		goToRequest: function (request) {
+			// Verify that the request exist
+			if (this.requestHistory.indexOf(request) !== -1) {
+				this.requestHistoryIndex = this.requestHistory.indexOf(request);
+				this.request = this.requestHistory[this.requestHistoryIndex];
+			}
+		},
 		previousResponse: function () {
 			this.responseHistoryIndex--;
-			this.response = this.responseHistory[this.responseHistoryIndex -1];
+			this.response = this.responseHistory[this.responseHistoryIndex];
+			this.showAssociatedRequest();
 		},
 		nextResponse: function () {
 			this.responseHistoryIndex++;
-			this.response = this.responseHistory[this.responseHistoryIndex-1];
+			this.response = this.responseHistory[this.responseHistoryIndex];
+			this.showAssociatedRequest();
 		},
 		clearResponse: function () {
 			this.response = '';
 			if (this.responseHistory.length != 0) {
-				this.responseHistoryIndex = this.responseHistory.length + 1;
+				this.responseHistoryIndex = this.responseHistory.length;
+			}
+		},
+		showAssociatedRequest: function () {
+			// Check whether there is a request linked to the on-screen response. If so, show it.
+			const index = Object.keys(this.requestResponseLinked).indexOf(this.response);
+			if ( index !== -1 ) {
+				this.requestHistoryIndex = index;
+				this.request = this.requestHistory[index];
+			}
+		},
+		goToResponse: function (response) {
+			// Verify that the reponse exist
+			if (this.responseHistory.indexOf(response) !== -1) {
+				this.responseHistoryIndex = this.responseHistory.indexOf(response);
+				this.response = this.responseHistory[this.responseHistoryIndex];
 			}
 		},
 		createWebsocket: function (address) {
@@ -103,21 +136,16 @@ Vue.component('socket-card', {
 				}
 
 				socket.onmessage = function (event) {
-					let msg = '';
-					try {
-						msg = JSON.parse(event.data);
-						msg = JSON.stringify(msg, null, '\t');
-					} catch (err) {
-						msg = event.data;
-					}
-					
+					msg = event.data;
 					that.response = msg;
 					that.responseHistory.push(msg);
-					that.responseHistoryIndex = that.responseHistory.length;
+					that.requestResponseLinked[that.requestHistory[that.requestHistory.length-1]] = msg;
+					that.responseHistoryIndex = (that.responseHistory.length -1);
 				}
 
 				socket.onerror = function (event) {
 					that.response = 'An error occured on socket';
+					console.log(event);
 					if(that.responseHistory.length != 0) { that.responseHistoryIndex++; }
 				}
 
@@ -127,9 +155,11 @@ Vue.component('socket-card', {
 					that.connectText = 'connect';
 					that.sendClass = 'not-filled';
 					that.response = `Socket closed with code ${event.code}\nReason : ${SOCKET_CODE[String(event.code)]}`;
-					if(that.responseHistory.length != 0) { that.responseHistoryIndex++; }
+					that.responseHistory.push(that.response);
+					that.responseHistoryIndex = (that.responseHistory.length -1);
 				}
 			} catch (err) {
+				this.responseHistory.push(err.message);
 				this.response = err.message;
 				this.socket = null;
 			}
@@ -223,8 +253,8 @@ Vue.component('socket-card', {
 					<div class="response message">
 						<div class="flex-space-between">
 							<div>
-								<button @click="previousResponse" :disabled="responseHistoryIndex <= 1">previous</button>
-								<button @click="nextResponse" :disabled="responseHistoryIndex >= responseHistory.length">next</button>
+								<button @click="previousResponse" :disabled="responseHistoryIndex <= 0">previous</button>
+								<button @click="nextResponse" :disabled="responseHistoryIndex >= (responseHistory.length -1)">next</button>
 							</div>
 							<div>
 								<button class="clear-button" @click="clearResponse">clear</button>

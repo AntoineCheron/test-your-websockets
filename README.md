@@ -20,6 +20,7 @@ Feel free to share your ideas and improvements !
 ## Coming features
 
 - Plugin system to add other format support
+- Responsive
 - Share your ideas, open an issue :)
 
 ## How to collaborate
@@ -34,4 +35,4 @@ Please respect the rules described here : https://code.tutsplus.com/tutorials/ho
 
 * [VueJS](https://vuejs.org/)
 * [SASS/SCSS](http://sass-lang.com/)
-*[ACE Editor](https://ace.c9.io/)
+* [ACE Editor](https://ace.c9.io/)
