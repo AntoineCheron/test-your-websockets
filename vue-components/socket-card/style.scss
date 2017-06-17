@@ -21,9 +21,23 @@ $bold: 700;
 	& > .name {
 		font-weight: $bold;
 		font-size: 48px;
-
 		position: relative;
 		top: -33px;
+
+		& > .delete-button {
+			display: block;
+			float: right;
+		}
+
+		& > .delete-button:hover {
+			cursor: pointer !important;
+		}
+	}
+
+	& > .close-button {
+		font-weight: $bold;
+		font-size: 18px;
+		height: 0px;
 	}
 
 	& > .connexion {
@@ -191,6 +205,8 @@ $bold: 700;
 
 	& > .message {
 		margin: 15px 0px;
+		width: 49%;
+		display: inline-block;
 
 		& > .flex-space-between{
 			margin-left: 12px;
@@ -238,12 +254,12 @@ $bold: 700;
 		}
 
 		p.message-label-1 {
-			top: 89px;
-			left: -38px;
+			top: 286px;
+			left: -36px;
 		}
 
 		p.message-label-2 {
-			top: 83px;
+			top: 278px;
 			left: -44px;
 		}
 
@@ -253,7 +269,7 @@ $bold: 700;
 			border: 1px solid $middle-grey;
 			background-color: white;
 			width: 94%;
-			height: 149px;
+			height: 345px;
 			z-index: 0;
 		}
 	}

@@ -13,7 +13,7 @@ Feel free to share your ideas and improvements !
 
 * ACE Editor integration
 * TLS Support
-* Previous/next requests and responses
+* Previous/next requests and responses + response linked to the request
 * Log everything in the response area
 * Code error translation to reason
 
@@ -21,6 +21,7 @@ Feel free to share your ideas and improvements !
 
 - Plugin system to add other format support
 - Responsive
+- A desktop version based on Electron ?
 - Share your ideas, open an issue :)
 
 ## How to collaborate
@@ -36,3 +37,5 @@ Please respect the rules described here : https://code.tutsplus.com/tutorials/ho
 * [VueJS](https://vuejs.org/)
 * [SASS/SCSS](http://sass-lang.com/)
 * [ACE Editor](https://ace.c9.io/)
+
+## External resources

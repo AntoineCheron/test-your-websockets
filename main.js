@@ -8,6 +8,9 @@ var app = new Vue({
   		lastIndex: 0,
   	}
   },
+  created () {
+    this.addSocket();
+  },
   methods: {
   	addSocket: function() {
   		// Retrieve the name and color information for the socket object
@@ -26,6 +29,10 @@ var app = new Vue({
   		// Change the color of the add-button
   		this.lastIndex++;
   		this.buttonColor = this.cardColors[this.lastIndex % this.cardColors.length];
-  	}
+  	},
+    deleteSocket: function(socket) {
+      const i = this.sockets.indexOf(socket);
+      this.sockets.splice(i, 1);
+    }
   },
 });

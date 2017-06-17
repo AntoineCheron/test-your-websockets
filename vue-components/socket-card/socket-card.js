@@ -14,7 +14,7 @@ Vue.component('socket-card', {
 	},
 	data: function () {
 		return {
-			socketAddress: 'ws://localhost:8080',
+			socketAddress: 'ws://',
 			socketSubprotocol: '',
 			enableTLS: false,
 			status: 'disconnected',
@@ -202,10 +202,17 @@ Vue.component('socket-card', {
         		return false;
         	}
         },
+        remove: function() {
+        	if (this.status === 'connected') {
+        		this.socket.close();
+        	}
+        	
+        	this.$emit('remove');
+        }
 	},
-	template: `<div class="w-6">
+	template: `<div class="w-10">
 				<div class="socket-card" :class="color">
-					<div class="name">{{name}}</div>
+					<div class="name">{{name}}<span class="delete-button" @click="remove">x</span></div>
 					<div class="connexion">
 						<div class="address">
 							<div class="label">Address</div>
@@ -246,7 +253,7 @@ Vue.component('socket-card', {
 							</div>
 						</div>
 						<div>
-							<p class="message-label message-label-1">Message</p>
+							<p class="message-label message-label-1">Request</p>
 							<editor v-model="request" :readOnly="!requestEditable"></editor>
 						</div>
 					</div>
