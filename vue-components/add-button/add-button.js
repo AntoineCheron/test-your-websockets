@@ -1,9 +1,7 @@
 Vue.component('add-button', {
-	template: '<div class="w-2">\
-				<button class="add-button" :class="color" @click="add">\
-					<div class="text"><div class="valign">ADD</div></div>\
-				</button>\
-			</div>',
+	template: `<button class="add-button" :class="color" @click="add">
+					<div class="text"><div class="valign">ADD</div></div>
+				</button>`,
 	props: ['color'],
 	methods: {
 		add: function () {

@@ -274,3 +274,42 @@ $bold: 700;
 		}
 	}
 }
+
+@media only screen and (max-width:800px) {
+	.socket-card {
+		& > .connexion {
+			flex-direction: column;
+			margin-top: -50px;
+
+			& > .address {
+				margin-left: 0px;
+			}
+
+			& > .socket-status {
+				margin-top: 15px;
+
+				& > .buttons {
+					display: block;
+				}
+			}
+		}
+
+		& > .message {
+			width: 100%;
+
+			p.message-label-1 {
+			top: 186px;
+			left: -36px;
+		}
+
+		p.message-label-2 {
+			top: 178px;
+			left: -44px;
+		}
+
+			.editor {
+				height: 245px;
+			}
+		}
+	}
+}

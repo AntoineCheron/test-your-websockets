@@ -210,67 +210,65 @@ Vue.component('socket-card', {
         	this.$emit('remove');
         }
 	},
-	template: `<div class="w-10">
-				<div class="socket-card" :class="color">
-					<div class="name">{{name}}<span class="delete-button" @click="remove">x</span></div>
-					<div class="connexion">
-						<div class="address">
-							<div class="label">Address</div>
-							<input :value="socketAddress" @input="toggleTlSFromText" class="field" type="text" placeholder="ws://your-address" 
-							:disabled="status === 'connected'" @keypress="enterPressed">
-							<div class="label sub-protocol-label">Sub-protocol</div>
-							<input v-model="socketSubprotocol" class="field-subprotocol" type="text" placeholder="(optional)" 
-							:disabled="status === 'connected'" @keypress="enterPressed">
+	template: `<div class="socket-card" :class="color">
+				<div class="name">{{name}}<span class="delete-button" @click="remove">x</span></div>
+				<div class="connexion">
+					<div class="address">
+						<div class="label">Address</div>
+						<input :value="socketAddress" @input="toggleTlSFromText" class="field" type="text" placeholder="ws://your-address" 
+						:disabled="status === 'connected'" @keypress="enterPressed">
+						<div class="label sub-protocol-label">Sub-protocol</div>
+						<input v-model="socketSubprotocol" class="field-subprotocol" type="text" placeholder="(optional)" 
+						:disabled="status === 'connected'" @keypress="enterPressed">
+					</div>
+					<div class="socket-status">
+						<div class="status">Status : <span class="value">{{status}}</span></div>
+						<div class="buttons">
+							<button class="connect" :class="connectClass" @click="toggleConnect">{{connectText}}</button>
+							<button class="send" :class="sendClass" @click="sendMessage" :disabled="socket === null || status === 'disconnected'">send message</button>
 						</div>
-						<div class="socket-status">
-							<div class="status">Status : <span class="value">{{status}}</span></div>
-							<div class="buttons">
-								<button class="connect" :class="connectClass" @click="toggleConnect">{{connectText}}</button>
-								<button class="send" :class="sendClass" @click="sendMessage" :disabled="socket === null || status === 'disconnected'">send message</button>
-							</div>
-							<div class="use-tls">
+						<div class="use-tls">
+							<div>
 								<div>
-									<div>
-										<div class="tls-checkbox">
-											<input v-model="enableTLS" type="checkbox" :id="checkboxId" :disabled="status === 'connected'">
-											<label :for="checkboxId" @click="toggleTLS"></label>
-										</div>
-										<label :for="checkboxId" class="checkbox-label" @click="toggleTLS">Use TLS protocol</label>
+									<div class="tls-checkbox">
+										<input v-model="enableTLS" type="checkbox" :id="checkboxId" :disabled="status === 'connected'">
+										<label :for="checkboxId" @click="toggleTLS"></label>
 									</div>
+									<label :for="checkboxId" class="checkbox-label" @click="toggleTLS">Use TLS protocol</label>
 								</div>
-								
 							</div>
+							
 						</div>
 					</div>
-					<div class="request message">
-						<div class="flex-space-between">
-							<div>
-								<button @click="previousRequest" :disabled="requestHistoryIndex <= 0">previous</button>
-								<button @click="nextRequest" :disabled="requestHistoryIndex >= requestHistory.length-1">next</button>
-							</div>
-							<div>
-								<button class="clear-button" @click="clearRequest">clear</button>
-							</div>
+				</div>
+				<div class="request message">
+					<div class="flex-space-between">
+						<div>
+							<button @click="previousRequest" :disabled="requestHistoryIndex <= 0">previous</button>
+							<button @click="nextRequest" :disabled="requestHistoryIndex >= requestHistory.length-1">next</button>
 						</div>
 						<div>
-							<p class="message-label message-label-1">Request</p>
-							<editor v-model="request" :readOnly="!requestEditable"></editor>
+							<button class="clear-button" @click="clearRequest">clear</button>
 						</div>
 					</div>
-					<div class="response message">
-						<div class="flex-space-between">
-							<div>
-								<button @click="previousResponse" :disabled="responseHistoryIndex <= 0">previous</button>
-								<button @click="nextResponse" :disabled="responseHistoryIndex >= (responseHistory.length -1)">next</button>
-							</div>
-							<div>
-								<button class="clear-button" @click="clearResponse">clear</button>
-							</div>
+					<div>
+						<p class="message-label message-label-1">Request</p>
+						<editor v-model="request" :readOnly="!requestEditable"></editor>
+					</div>
+				</div>
+				<div class="response message">
+					<div class="flex-space-between">
+						<div>
+							<button @click="previousResponse" :disabled="responseHistoryIndex <= 0">previous</button>
+							<button @click="nextResponse" :disabled="responseHistoryIndex >= (responseHistory.length -1)">next</button>
 						</div>
 						<div>
-							<p class="message-label message-label-2">Response</p>
-							<editor v-model="response" :readOnly="!responseEditable"></editor>
+							<button class="clear-button" @click="clearResponse">clear</button>
 						</div>
+					</div>
+					<div>
+						<p class="message-label message-label-2">Response</p>
+						<editor v-model="response" :readOnly="!responseEditable"></editor>
 					</div>
 				</div>
 			</div>`

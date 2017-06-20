@@ -29,6 +29,19 @@ body {
 .flex-wrap {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+@media only screen and (min-width:580px) and (max-width:980px) {
+	.title {
+		font-size: 54px;
+	}
+}
+
+@media only screen and (max-width:600px) {
+	.title {
+		font-size: 40px;
+	}
 }
 
 // Importing font
