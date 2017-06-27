@@ -8,6 +8,7 @@ var app = new Vue({
   		lastIndex: 0,
       messagingManagerNames: ['json'],
       messagingManagers: [],
+      displayAddLanguageModal: true
   	}
   },
   created () {
@@ -52,7 +53,8 @@ var app = new Vue({
       this.messagingManagers.push(manager);
     },
     addLanguage: function () {
-      alert('Will open a modal soon');
+      this.displayAddLanguageModal = true;
+      document.getElementById("app")
     },
   },
 });

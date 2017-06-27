@@ -4,6 +4,7 @@
 @import 'stylesheets/utils';
 @import 'vue-components/add-button/style';
 @import 'vue-components/socket-card/style';
+@import 'vue-components/add-language-modal/add-language-modal';
 
 body {
 	background-color: $black;
@@ -19,6 +20,16 @@ body {
 	& > #websocket-title {
 		color: $blue;
 		font-family: 'Abril Fatface';
+	}
+}
+
+.blur {
+	& > .flex-wrap, .title {
+		-webkit-filter: blur(4px);
+		-moz-filter: blur(4px);
+		-o-filter: blur(4px);
+		-ms-filter: blur(4px);
+		filter: blur(4px);
 	}
 }
 
