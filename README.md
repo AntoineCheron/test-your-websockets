@@ -11,7 +11,9 @@ Feel free to share your ideas and improvements !
 
 ## Features
 
+* Add your own encoding/decoding method
 * ACE Editor integration
+* Choose the language to use for text coloration in the editor
 * TLS Support
 * Previous/next requests and responses + response linked to the request
 * Log everything in the response area
@@ -19,8 +21,6 @@ Feel free to share your ideas and improvements !
 
 ## Coming features
 
-- Plugin system to add other format support
-- Responsive
 - A desktop version based on Electron ?
 - Share your ideas, open an issue :)
 
@@ -39,3 +39,5 @@ Please respect the rules described here : https://code.tutsplus.com/tutorials/ho
 * [ACE Editor](https://ace.c9.io/)
 
 ## External resources
+
+* require function, in file scripts/require.js from [Sam & Max](sametmax.com/include-require-import-en-javascript/)

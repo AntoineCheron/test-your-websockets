@@ -1,29 +1,30 @@
 Vue.component('socket-card', {
-	props: {
-		'color' : {
-			type: String,
-			required:true,
-		}, 
-		'name' : {
-			type: String,
-			required: true,
-		}
-	},
-	created: function () {
-		this.checkboxId = this.generateUUID();
-	},
+	/* =====================================================================================
+	 					Data are the attributes of the component
+	 =====================================================================================*/
 	data: function () {
 		return {
+			// Socket network related attributes
 			socketAddress: 'ws://',
 			socketSubprotocol: '',
 			enableTLS: false,
+
+			// Socket status related attributes
 			status: 'disconnected',
+
+			// UI related attributes
 			connectClass: 'filled',
 			connectText: 'connect',
 			sendClass: 'not-filled',
+
+			// Socket instance, to communicate
 			socket: null,
+
+			// Request and response content
 			response : '',
 			request: '',
+
+			// Messages history related attributes
 			requestHistory : [],
 			requestHistoryIndex: 0,
 			responseHistory: [],
@@ -32,9 +33,43 @@ Vue.component('socket-card', {
 			requestEditable: true,
 			responseEditable: false,
 			checkboxId: '',
+
+			// Messaging manager related attributes
+			currentMessagingManager: null,
+			language: '0',
 		}
 	},
+	/* =====================================================================================
+	 					Props are data passed by the parent component
+	 =====================================================================================*/
+	props: {
+		'color' : {
+			type: String,
+			required: true,
+		}, 
+		'name' : {
+			type: String,
+			required: true,
+		},
+		'messagingManagers': {
+			type: Array,
+			required: false,
+		}
+	},
+	/* =====================================================================================
+	 					The created method is one of the VueJs lifecycle methods
+	 =====================================================================================*/
+	created: function () {
+		// When the component is created, we assign it a unique id
+		this.checkboxId = this.generateUUID();
+	},
+	/* =====================================================================================
+	 						ALL THE METHODS FOR THE COMPONENT
+	 =====================================================================================*/
 	methods: {
+		/** 
+		*	Toggle the connected state of the Websocket
+		*/
 		toggleConnect: function () {
 			if (this.socket === null || this.status === 'disconnected') {
 				// Setting the subprotocol. Support multiple protocol if user enter the list as a JSON array
@@ -54,34 +89,43 @@ Vue.component('socket-card', {
 				this.socket = null;
 			}
 		},
-		sendMessage: function () {
-			if (this.socket !== null && this.socket.readyState === 1 && this.request !== '') {
-				this.socket.send(this.request);
-				this.requestHistory.push(this.request);
-				this.requestHistoryIndex = this.requestHistory.length;
-				this.request = '';
-			}
-		},
+		/** 
+		*	Display the previous request and its associated response (if existing)
+		*/
 		previousRequest: function () {
 			this.requestHistoryIndex--;
 			this.request = this.requestHistory[this.requestHistoryIndex];
 			this.showAssociatedResponse();
 		},
+		/** 
+		*	Display the next request and its associated response (if existing)
+		*/
 		nextRequest: function () {
 			this.requestHistoryIndex++;
 			this.request = this.requestHistory[this.requestHistoryIndex];
 			this.showAssociatedResponse();
 		},
+		/** 
+		*	Clear the request message editor
+		*/
 		clearRequest: function () {
 			this.request = '';
 			this.requestHistoryIndex = this.requestHistory.length;
 		},
+		/** 
+		*	Display in the response field the response associated to the request displayed
+		*	in the request field.
+		*/
 		showAssociatedResponse() {
 			// Check whether there is a response linked to the request. If so, show it.
 			if (this.requestResponseLinked[this.request]) {
 				this.goToResponse(this.requestResponseLinked[this.request]);
 			}
 		},
+		/** 
+		*	Display the given request in the request field
+		*	@param request : the request to display in the request field
+		*/
 		goToRequest: function (request) {
 			// Verify that the request exist
 			if (this.requestHistory.indexOf(request) !== -1) {
@@ -89,22 +133,35 @@ Vue.component('socket-card', {
 				this.request = this.requestHistory[this.requestHistoryIndex];
 			}
 		},
+		/** 
+		*	Display the previous response and its associated request (if existing)
+		*/
 		previousResponse: function () {
 			this.responseHistoryIndex--;
 			this.response = this.responseHistory[this.responseHistoryIndex];
 			this.showAssociatedRequest();
 		},
+		/** 
+		*	Display the next response and its associated request (if existing)
+		*/
 		nextResponse: function () {
 			this.responseHistoryIndex++;
 			this.response = this.responseHistory[this.responseHistoryIndex];
 			this.showAssociatedRequest();
 		},
+		/** 
+		*	Clear the response message editor
+		*/
 		clearResponse: function () {
 			this.response = '';
 			if (this.responseHistory.length != 0) {
 				this.responseHistoryIndex = this.responseHistory.length;
 			}
 		},
+		/** 
+		*	Display in the request field the request associated to the response displayed
+		*	in the response field.
+		*/
 		showAssociatedRequest: function () {
 			// Check whether there is a request linked to the on-screen response. If so, show it.
 			const index = Object.keys(this.requestResponseLinked).indexOf(this.response);
@@ -113,6 +170,10 @@ Vue.component('socket-card', {
 				this.request = this.requestHistory[index];
 			}
 		},
+		/** 
+		*	Display the given reponse in the response field
+		*	@param response : the response to display in the request field
+		*/
 		goToResponse: function (response) {
 			// Verify that the reponse exist
 			if (this.responseHistory.indexOf(response) !== -1) {
@@ -137,10 +198,7 @@ Vue.component('socket-card', {
 
 				socket.onmessage = function (event) {
 					msg = event.data;
-					that.response = msg;
-					that.responseHistory.push(msg);
-					that.requestResponseLinked[that.requestHistory[that.requestHistory.length-1]] = msg;
-					that.responseHistoryIndex = (that.responseHistory.length -1);
+					that.handleReceivedMessage(msg);
 				}
 
 				socket.onerror = function (event) {
@@ -164,11 +222,37 @@ Vue.component('socket-card', {
 				this.socket = null;
 			}
 		},
-		updateRequest: function(value) {
-			this.request = value;
+		sendMessage: function () {
+			if (this.socket !== null && this.socket.readyState === 1 && this.request !== '') {
+				// We first check whether the messaging manager has a function to encode the message
+				// that the user just typped.
+				if (this.currentMessagingManager.prototype.hasOwnProperty('encodeBeforeSending')) {
+					// Then we call the function that will encode and message and send it.
+					const encodedMessage = this.currentMessagingManager.encodeBeforeSending(this.request);
+					this.socket.send(encodedMessage);
+				} else {
+					this.socket.send(this.request);
+				}
+				// After that we verify if the user wants to store the raw or encoded version of 
+				// the message and store the appropriate message.
+				this.requestHistory.push(this.currentMessagingManager.storeEncodedMessage ? encodedMessage : this.request);
+				this.requestHistoryIndex = this.requestHistory.length;
+				this.request = '';
+			}
 		},
-		updateResponse: function(value) {
-			this.response = value;
+		handleReceivedMessage: function(message) {
+			// We first check whether the messaging manager has a function to decode the message
+			// that was just received.
+			if (this.currentMessagingManager.prototype.hasOwnProperty('decodeOnReceive')) {
+				// Then we call the function that will decode the message.
+				const decodedMessage = this.currentMessagingManager.decodeOnReceive(message);
+			}
+			// After that we verify if the user wants to store the raw or encoded version of 
+			// the message and store the appropriate message.
+			this.response = this.currentMessagingManager.storeEncodedMessage ? decodedMessage : message
+			this.responseHistory.push(this.response);
+			this.requestResponseLinked[this.requestHistory[this.requestHistory.length-1]] = this.response;
+			this.responseHistoryIndex = (this.responseHistory.length -1);
 		},
 		generateUUID: function() {
             var d = new Date().getTime();
@@ -208,6 +292,14 @@ Vue.component('socket-card', {
         	}
         	
         	this.$emit('remove');
+        },
+        selectedLanguage: function(event) {
+        	if (event.srcElement.value !== 'add') {
+        		this.language = parseInt(event.srcElement.value);
+        		this.currentMessagingManager = this.messagingManagers[this.language];
+        	} else if (event.srcElement.value === 'add') {
+        		this.$emit('add-language');
+        	}
         }
 	},
 	template: `<div class="socket-card" :class="color">
@@ -217,9 +309,18 @@ Vue.component('socket-card', {
 						<div class="label">Address</div>
 						<input :value="socketAddress" @input="toggleTlSFromText" class="field" type="text" placeholder="ws://your-address" 
 						:disabled="status === 'connected'" @keypress="enterPressed">
-						<div class="label sub-protocol-label">Sub-protocol</div>
-						<input v-model="socketSubprotocol" class="field-subprotocol" type="text" placeholder="(optional)" 
-						:disabled="status === 'connected'" @keypress="enterPressed">
+						<div class="subprotocol">
+							<div class="label sub-protocol-label">Sub-protocol</div>
+							<input v-model="socketSubprotocol" class="field-subprotocol" type="text" placeholder="(optional)" :disabled="status === 'connected'" @keypress="enterPressed">
+						</div>
+						<div class="language-selection">
+							<select type="select" v-model="language" @input="selectedLanguage">
+								<option disabled value="default">Please select the language</option>
+								<option v-for="manager in messagingManagers" :value="messagingManagers.indexOf(manager)">{{ manager.name }}</option>
+								<option value="add">Add...</option>
+							</select>
+						</div>
+						
 					</div>
 					<div class="socket-status">
 						<div class="status">Status : <span class="value">{{status}}</span></div>
@@ -253,7 +354,7 @@ Vue.component('socket-card', {
 					</div>
 					<div>
 						<p class="message-label message-label-1">Request</p>
-						<editor v-model="request" :readOnly="!requestEditable"></editor>
+						<editor v-model="request" :readOnly="!requestEditable" :language="currentMessagingManager != null ? currentMessagingManager.editorLanguage : 'javascript'"></editor>
 					</div>
 				</div>
 				<div class="response message">
@@ -268,7 +369,7 @@ Vue.component('socket-card', {
 					</div>
 					<div>
 						<p class="message-label message-label-2">Response</p>
-						<editor v-model="response" :readOnly="!responseEditable"></editor>
+						<editor v-model="response" :readOnly="!responseEditable" :language="currentMessagingManager != null ? currentMessagingManager.editorLanguage : 'javascript'"></editor>
 					</div>
 				</div>
 			</div>`

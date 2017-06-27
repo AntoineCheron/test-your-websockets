@@ -6,9 +6,17 @@ var app = new Vue({
   		cardColors : ['red', 'blue', 'orange', 'green', 'purple', 'dark-grey'],
   		buttonColor : 'red',
   		lastIndex: 0,
+      messagingManagerNames: ['json'],
+      messagingManagers: [],
   	}
   },
   created () {
+    // Download each messaging manager contained into the array messagingManagerNames
+    this.messagingManagerNames.forEach((name) => {
+      this.addMessagingManager(name);
+    });
+
+    // Add a first card
     this.addSocket();
   },
   methods: {
@@ -33,6 +41,18 @@ var app = new Vue({
     deleteSocket: function(socket) {
       const i = this.sockets.indexOf(socket);
       this.sockets.splice(i, 1);
-    }
+    },
+    addMessagingManager: function(name) {
+      const link = `scripts/messaging-managers/${name}.js`
+      include(link, function() {
+        app.receivedMessageManager(MessagingManager);
+      });
+    },
+    receivedMessageManager: function(manager) {
+      this.messagingManagers.push(manager);
+    },
+    addLanguage: function () {
+      alert('Will open a modal soon');
+    },
   },
 });

@@ -54,18 +54,40 @@ $bold: 700;
 			width: calc(100% - 202px);
 			margin-right: 10px;
 
-			& > .label {
-				font-weight: $light;
-				font-size: 12px;
-				color: $black;
-				margin-top: 5px;
+			& > .subprotocol {
+				display: inline-block;
+				width: calc(59% - 10px);
+
+				& > .label {
+					font-weight: $light;
+					font-size: 12px;
+					color: $black;
+					margin-top: 5px;
+				}
+
+				& > .sub-protocol-label {
+					margin-top: 5px;
+				}
+
+				& > .field-subprotocol {
+					font-size: 14px;
+					margin-top: 2px;
+					border-bottom-width: 1px;
+					border-color: $grey;
+				}
 			}
 
-			& > .sub-protocol-label {
-				margin-top: 5px;
+			& > .language-selection {
+				display: inline-block;
+				width: 40%;
+				margin-left: 10px;
+
+				& > select {
+					width: 100%;
+				}
 			}
 
-			& > input {
+			input {
 				width: 100%;
 				color: $black;
 				background-color: $light-grey;
@@ -79,14 +101,7 @@ $bold: 700;
 				border-bottom-width: 2px;
 			}
 
-			& > .field-subprotocol {
-				font-size: 14px;
-				margin-top: 2px;
-				border-bottom-width: 1px;
-				border-color: $grey;
-			}
-
-			& > input:focus {
+			input:focus {
 				outline: 0;
 				margin-bottom: 6px;
 			}

@@ -7,7 +7,7 @@ Vue.component('editor', {
         const that = this;
         this.editor = ace.edit(this.uuid);
         this.editor.setTheme("ace/theme/test_your_websocket_custom");
-        this.editor.getSession().setMode("ace/mode/javascript");
+        this.editor.getSession().setMode(`ace/mode/${this.language}`);
         this.editor.setReadOnly(this.readOnly);
         this.editor.getSession().on('change', () => { that.editorValueChanged(); });
         this.editor.$blockScrolling = Infinity
@@ -19,7 +19,12 @@ Vue.component('editor', {
         'readOnly' : {
             type: Boolean,
             required: true
-        }
+        },
+        'language': {
+            required: false,
+            type: String,
+            default: 'javascript'
+        },
     },
     watch: {
         value: function(val) {
@@ -34,6 +39,9 @@ Vue.component('editor', {
                 this.editor.selection.moveTo(position.row, position.column);
 
             }
+        },
+        language: function(val) {
+            this.editor.getSession().setMode(`ace/mode/${val}`);
         },
     },
     data () {

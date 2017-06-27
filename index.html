@@ -9,6 +9,7 @@
 	<!-- Importing VueJS -->
 	<script src="scripts/vue-2.3.4.js"></script>
 
+	<script src="scripts/include.js"></script>
 	<!-- Importing fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Montserrat:300,400,500,700" rel="stylesheet">
 </head>
@@ -22,7 +23,7 @@
 		<div id="app" class="w-12">
 			<div class="flex-wrap">
 				<div id="cards" class="w-10" v-for="socket in sockets">
-					<socket-card :color="socket.color" :name="socket.name" @remove="deleteSocket(socket)"></socket-card>
+					<socket-card :color="socket.color" :name="socket.name" :messaging-managers="messagingManagers" @remove="deleteSocket(socket)" @add-language="addLanguage"></socket-card>
 				</div>
 				<div id="buttons" class="w-2">
 					<add-button :color="buttonColor" @add="addSocket"></add-button>
