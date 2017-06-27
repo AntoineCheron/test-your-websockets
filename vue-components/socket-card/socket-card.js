@@ -181,6 +181,10 @@ Vue.component('socket-card', {
 				this.response = this.responseHistory[this.responseHistoryIndex];
 			}
 		},
+		/** 
+		*	Create and connect a websocket to the given address
+		*	@param address : the url to connect to
+		*/
 		createWebsocket: function (address) {
 			let that = this;
 			try {
@@ -222,6 +226,10 @@ Vue.component('socket-card', {
 				this.socket = null;
 			}
 		},
+		/** 
+		*	Send the message writen in the request field through the socket.
+		*	If the messaging manager contains an encodeBeforeSending method, it will use it.
+		*/
 		sendMessage: function () {
 			if (this.socket !== null && this.socket.readyState === 1 && this.request !== '') {
 				// We first check whether the messaging manager has a function to encode the message
@@ -240,6 +248,10 @@ Vue.component('socket-card', {
 				this.request = '';
 			}
 		},
+		/** 
+		*	Handle the message received by the websocket
+		*	If the messaging manager contains a decodeOnReceive method, it will use it.
+		*/
 		handleReceivedMessage: function(message) {
 			// We first check whether the messaging manager has a function to decode the message
 			// that was just received.
@@ -254,6 +266,10 @@ Vue.component('socket-card', {
 			this.requestResponseLinked[this.requestHistory[this.requestHistory.length-1]] = this.response;
 			this.responseHistoryIndex = (this.responseHistory.length -1);
 		},
+		/** 
+		*	Generate a unique id
+		*	@return uuid (string) : a unique id
+		*/
 		generateUUID: function() {
             var d = new Date().getTime();
             var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -263,6 +279,9 @@ Vue.component('socket-card', {
              });
             return uuid;
         },
+        /** 
+		*	Toggle the TLS feature
+		*/
         toggleTLS: function() {
         	// this.enableTLS change after this function has been called
         	if (!this.enableTLS) {
@@ -271,6 +290,9 @@ Vue.component('socket-card', {
         		this.socketAddress = this.socketAddress.replace('wss', 'ws');
         	}
         },
+        /** 
+		*	Toggle the TLS feature from the address text input by the user
+		*/
         toggleTlSFromText: function(event) {
         	// Set the value of socketAddress (default behavior)
         	this.socketAddress = event.target.value;
@@ -280,12 +302,18 @@ Vue.component('socket-card', {
         	if (prefix === 'wss') { this.enableTLS = true; }
         	else { this.enableTLS = false; }
         },
+        /** 
+		*	Connect the websocket when the user press enter in the address or subprotocol field
+		*/
         enterPressed: function(event) {
         	if (event.keyCode === 13 && this.status === 'disconnected') {
         		this.toggleConnect();
         		return false;
         	}
         },
+        /** 
+		*	Close the websocket connexion and remove the card
+		*/
         remove: function() {
         	if (this.status === 'connected') {
         		this.socket.close();
@@ -293,6 +321,10 @@ Vue.component('socket-card', {
         	
         	this.$emit('remove');
         },
+        /** 
+		*	Activate the messaging manager the user just selected
+		*	@param event : the mouseEvent triggered by the click of the user
+		*/
         selectedLanguage: function(event) {
         	if (event.srcElement.value !== 'add') {
         		this.language = parseInt(event.srcElement.value);

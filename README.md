@@ -24,6 +24,29 @@ Feel free to share your ideas and improvements !
 - A desktop version based on Electron ?
 - Share your ideas, open an issue :)
 
+## How to add your own encoding/decoding feature
+
+You have three choices. You can either make a pull-request and add your plugin in the ./scripts/messaging-manager folder, or upload your file in the modal, or write your code in the modal. 
+Be careful ! When using the modal, in both case, the plugin won't be save. Pull-request is the best choice.
+
+In either case, please follow the following template.
+```javascript
+const MessagingManager = {
+	name: string,
+	editorLanguage: string, // Search for the ace mode that you would like to use. We take care of the beginning part /ace/mode
+	storeEncodedMessage: boolean,
+	customAceEditorInstace: , // Ace editor instance : https://ace.c9.io/#nav=api&api=editor
+	encodeBeforeSending: (inputMessage) => {
+		// Code that transform the user-written message into the encoded message that should be send through the socket.
+		return encodedMessage;
+	},
+	decodeOnReceive: (receivedMessage) => {
+		// Code that transform the received message into the message that will be displayed.
+		return decodedMessage;
+	},
+};
+```
+
 ## How to collaborate
 
 Please respect the rules described here : https://code.tutsplus.com/tutorials/how-to-collaborate-on-github--net-34267.
