@@ -43,6 +43,16 @@ body {
 	justify-content: space-between;
 }
 
+#github-link {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+
+	& > img {
+		width: 32px;
+	}
+}
+
 @media only screen and (min-width:580px) and (max-width:980px) {
 	.title {
 		font-size: 54px;
