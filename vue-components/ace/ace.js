@@ -8,6 +8,7 @@ Vue.component('editor', {
         this.editor = ace.edit(this.uuid);
         this.editor.setTheme("ace/theme/test_your_websocket_custom");
         this.editor.getSession().setMode(`ace/mode/${this.language}`);
+        if (this.value) { this.editor.getSession().setValue(this.value); }
         this.editor.setReadOnly(this.readOnly);
         this.editor.getSession().on('change', () => { that.editorValueChanged(); });
         this.editor.$blockScrolling = Infinity

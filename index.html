@@ -22,7 +22,7 @@
 
 		<div class="row">
 			<div class="w-12" :class="displayAddLanguageModal ? 'blur' : ''">
-				<add-language-modal v-model="displayAddLanguageModal"></add-language-modal>
+				<add-language-modal v-model="displayAddLanguageModal" @new-messaging-manager="newMessagingManager"></add-language-modal>
 				<div class="flex-wrap">
 					<div id="cards" class="w-10" v-for="socket in sockets">
 						<socket-card :color="socket.color" :name="socket.name" :messaging-managers="messagingManagers" @remove="deleteSocket(socket)" @add-language="addLanguage"></socket-card>

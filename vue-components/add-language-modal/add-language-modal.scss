@@ -28,6 +28,16 @@ $bold: 700;
 		margin-top: -20px;
 		font-weight: 400;
 		color: $dark-grey;
+
+		& > a {
+			font-weight: 500;
+			color: $dark-grey;
+			text-decoration: none;
+		}
+
+		& > a:focus {
+			outline: 0;
+		}
 	}
 
 	& > #uploadMessagingManager {
@@ -120,6 +130,69 @@ $bold: 700;
 				height: 180px;
 				margin-top: 5px;
 			}
+		}
+	}
+
+	& > .inputfile {
+		margin: 30px 0;
+		text-align: center;
+
+		& > input {
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+		}
+
+		& > label {
+			padding: 9px 18px;
+			border-width: 1px;
+			border-style: solid;
+			margin: 0px 2.5px;
+
+			font-size: 12px;
+			font-family: Montserrat;
+			font-weight: $regular;
+			text-transform: uppercase;
+
+			color: #e5127d;
+						
+			// Creates the gradient
+			border: 1px solid transparent;
+		  	background-color: $light-grey;
+		  	-moz-border-image: -moz-linear-gradient(top left,#f7c626 10%,#f68c2f 40%,#e5127d 85%);
+		  	-webkit-border-image: -webkit-linear-gradient(top left,#f7c626 10%,#f68c2f 40%,#e5127d 85%);
+		  	border-image: linear-gradient(to bottom right,#f7c626 10%,#f68c2f 40%,#e5127d 85%);
+		  	//linear-gradient(90deg,#f7c626 15%,#f68c2f 40%,#e5127d 85%)
+		  	border-image-slice: 1;
+
+		  	& > svg {
+		  		width: 20px;
+		  		height: 20px;
+		  		fill: #e5127d;
+		  		vertical-align: middle;
+		  		margin-right: 8px;
+		  	}
+		}
+
+		& > label:hover {
+			cursor: pointer;
+			box-shadow: 0px 1px 2px rgba(0,0,0,0.5);
+
+			color: white;
+
+			// Creates the gradient
+			border: none;
+		  	-moz-background-image: -moz-linear-gradient(top left,#f7c626 10%,#f68c2f 40%,#e5127d 85%);
+		  	-webkit-background-image: -webkit-linear-gradient(top left,#f7c626 10%,#f68c2f 40%,#e5127d 85%);
+		  	background-image: linear-gradient(to bottom right,#f7c626 10%,#f68c2f 40%,#e5127d 85%);
+		  	background-image-slice: 1;
+
+		  	& > svg {
+		  		fill: white;
+		  	}
 		}
 	}
 }

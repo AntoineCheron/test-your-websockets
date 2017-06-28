@@ -54,7 +54,14 @@ var app = new Vue({
     },
     addLanguage: function () {
       this.displayAddLanguageModal = true;
-      document.getElementById("app")
+      // Lock the scroll on the background part while working on the add language card
+      document.getElementsByTagName("body")[0].style.overflow = 'hidden';
     },
+    newMessagingManager: function(manager) {
+      if (manager !== null) {
+        this.messagingManagerNames.push(manager.name);
+        this.receivedMessageManager(manager);
+      }
+    }
   },
 });
