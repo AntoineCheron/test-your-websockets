@@ -8,7 +8,7 @@ var app = new Vue({
   		lastIndex: 0,
       messagingManagerNames: ['json'],
       messagingManagers: [],
-      displayAddLanguageModal: true
+      displayAddLanguageModal: false
   	}
   },
   created () {
