@@ -1,7 +1,6 @@
 .valign {
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(50%);
     /* vendor prefixes omitted due to brevity */
 }
 

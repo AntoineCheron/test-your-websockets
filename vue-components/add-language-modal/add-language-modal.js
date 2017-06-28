@@ -11,8 +11,8 @@ Vue.component('add-language-modal', {
 				\n	return decodedMessage;\
 			\n}',
 			messagingManager: {
-				name: 'Pape',
-				editorLanguage: 'javascript', // Search for the ace mode that you would like to use. We take care of the beginning part /ace/mode
+				name: '',
+				editorLanguage: '', // Search for the ace mode that you would like to use. We take care of the beginning part /ace/mode
 				storeEncodedMessage: false,
 				customAceEditorInstace: null, // Ace editor instance : https://ace.c9.io/#nav=api&api=editor
 				encodeBeforeSending: '',
