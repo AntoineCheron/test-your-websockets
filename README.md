@@ -18,10 +18,10 @@ Feel free to share your ideas and improvements !
 * Previous/next requests and responses + response linked to the request
 * Log everything in the response area
 * Code error translation to reason
+* Desktop app available, based on electron
 
 ## Coming features
 
-- A desktop version based on Electron ?
 - Share your ideas, open an issue :)
 
 ## How to add your own encoding/decoding feature
@@ -60,6 +60,7 @@ Please respect the rules described here : https://code.tutsplus.com/tutorials/ho
 * [VueJS](https://vuejs.org/)
 * [SASS/SCSS](http://sass-lang.com/)
 * [ACE Editor](https://ace.c9.io/)
+* [Electron](https://electron.atom.io)
 
 ## External resources
 
