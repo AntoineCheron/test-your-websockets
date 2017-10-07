@@ -1,0 +1,23 @@
+{
+  "name": "test-your-websockets-electron",
+  "version": "1.0.0",
+  "description": "A serverless desktop app allowing you to test your websockets",
+  "main": "electron.js",
+  "dependencies": {
+    "electron": "^1.7.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntoineCheron/test-your-websockets.git"
+  },
+  "author": "AntoineCheron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntoineCheron/test-your-websockets/issues"
+  },
+  "homepage": "https://github.com/AntoineCheron/test-your-websockets#readme"
+}

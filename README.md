@@ -21,7 +21,6 @@ Feel free to share your ideas and improvements !
 
 ## Coming features
 
-- A desktop version based on Electron ?
 - Share your ideas, open an issue :)
 
 ## How to add your own encoding/decoding feature
